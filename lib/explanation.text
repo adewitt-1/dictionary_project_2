@@ -1,0 +1,41 @@
+Here's my attempt to describe the entire app starting at Build:
+
+In build, it creates the app bar, title text and fonts, then calls on titleStyling()
+which beautifies the text above the text bar that the user can easily read with icons and spacing.
+
+Then, it calls on the searchBarWidget(), which is a widget that is wrapped in padding
+ and has a search bar, controlled and tracked by _searchController, with hintText as
+ a placeholder and an icon. When enter is pressed for onSubmitted, it calls on the
+ function _searchWord()
+
+This will then change the current state from its default and call on fetchDictionary,
+ which calls on the method from dictionary_service.dart that calls on the API to
+ implement that new word, thus triggering new results.
+
+Then, Expanded is called, making the FutureBuilder contents take up the remaining
+pieces of the webpage. The FutureBuilder waits for the futureDictionary, which is
+what the fetchDictionary method returns -- essentially the data from the API. Once
+it arrives, it determines how to error handle, and if everything passes, then it
+loads the data properly into a new variable called dictionary. With that, it then
+calls displayDictionary.
+
+DisplayDictionary will set up the initial scrollable list for the dictionary results
+ to later appear. It determines how many items need to be created based on the length
+  of the dictionary, and how to build them for each item in the list. Will go through
+   all, and the position will keep track of which word it is on. For each word, it will
+    call getDefinitions.
+
+getDefinitions will essentially grab all of the definitions of the current word that
+ was passed into it. It will use a mapping logic to go through all of the meanings.
+ The way that the dictionary is structured is word > meanings > definitions > definition.
+  Thus, we cycle through all the meanings, and for each meanings, we cycle through and
+  get all of the definitions per each meaning. Meanings will have multiple definitions,
+  and the definitions will be in an array called definitions. It will grab each one and
+  display each definition on a new line for each meaning. Then, for each meaning after
+  all definitions have been gathered for that meaning, it will call dictionaryCard.
+
+DictionaryCard will essentially take all of the information that has been gathered
+and neatly, aesthetically format them into their own individual cards to list all
+definitions per meaning. It has icons, fancy font, and subtitles displaying all fo the information.
+
+That is how the dictionary works.
