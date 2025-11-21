@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // This will set-up the scrollable list for the dictionary results and call getDefinitions
-  Padding displayDictionary(List<Dictionary> dictionary) {
+  Widget displayDictionary(List<Dictionary> dictionary) {
     return Padding(
       // Specifies amount of padding
       padding: const EdgeInsets.all(25.0),
@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // Gets the definitions of the current word and calls dictionaryCard
-  Column getDefinitions(Dictionary word) {
+  Widget getDefinitions(Dictionary word) {
     return Column(
       // .map is used to loop through each meaning of the current word
       children: word.meanings.map((meaning) {
@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Card dictionaryCard(Dictionary word, Meaning meaning, String definitions) {
+  Widget dictionaryCard(Dictionary word, Meaning meaning, String definitions) {
     return Card(
       // Styling
       color: Colors.white70,
@@ -159,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // Beautifies main text of the page
-  Row titleStyling() {
+  Widget titleStyling() {
     return Row(
       // Aligns to the center
       mainAxisAlignment: MainAxisAlignment.center,
@@ -234,6 +234,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                   if (asyncSnapshot.hasError) {
                     print('Project snapshot error: ${asyncSnapshot.error}');
+                    return Text('Error: ${asyncSnapshot.error}');
                   }
                   if (asyncSnapshot.data == null ||
                       asyncSnapshot.connectionState == ConnectionState.none) {
